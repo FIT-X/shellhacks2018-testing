@@ -1,5 +1,5 @@
 node_modules
-settings.json
+settings.*
 package-lock.json
 dist
 .DS_Store
