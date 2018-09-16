@@ -3,10 +3,6 @@ import * as crypto from 'crypto';
 import { MongoClient, Db, ObjectId } from 'mongodb';
 
 import { Person, Location, Report, Account, Media } from './types';
-import { Result } from 'range-parser';
-import { promises } from 'fs';
-
-
 
 const debug = require('debug')('app:database');
 
