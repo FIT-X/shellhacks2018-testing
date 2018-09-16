@@ -111,4 +111,16 @@ export class Database {
         const collection = this.db.collection('Media');
         return collection.insertOne(media)
     }
+
+    public getMedia(id: ObjectId) {
+        if (!this.db) throw new Error('no db');
+        const collection = this.db.collection('Media');
+        return collection.findOne({ _id: id });
+    }
+
+    public listMedia() {
+        if (!this.db) throw new Error('no db');
+        const collection = this.db.collection('Media');
+        return collection.find();
+    }
 } 
