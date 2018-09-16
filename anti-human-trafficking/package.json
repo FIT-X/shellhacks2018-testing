@@ -19,9 +19,10 @@
     "debug": "^4.0.1",
     "express": "^4.16.3",
     "mongodb": "^3.1.6",
-    "mysql": "^2.16.0"
+    "redis": "^2.8.0"
   },
   "devDependencies": {
+    "@types/redis": "^2.8.6",
     "typescript": "^3.0.3"
   }
 }
