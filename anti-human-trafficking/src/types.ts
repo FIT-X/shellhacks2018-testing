@@ -55,3 +55,11 @@ export interface Report {
     traffickingType: TraffickingType,
     created: string
 }   
+
+
+export interface Account {
+    id: ObjectId,
+    username: string,
+    passwordHash: string,
+    created: string
+}
