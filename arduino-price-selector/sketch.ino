@@ -16,7 +16,6 @@ void setup() {
   pixels.begin(); // This initializes the NeoPixel library.
 
   clear();
-  Serial.println("1");
 }
 
 void loop() {
@@ -36,8 +35,9 @@ void loop() {
   if (digitalRead(buttonPin) == HIGH && buttonPressed == false) {
     buttonPressed = true;
     counter++;
-    Serial.println(counter);
     if (counter > 12) counter = 1;
+    Serial.println(counter);
+   
     for (int i = 0; i <= NUMPIXELS; i++) {
       // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
       if (i <= counter - 1)
@@ -76,6 +76,7 @@ void clear() {
   }
   pixels.show();
   counter = 1;
+  Serial.println("1");
 }
 
 // Input a value 0 to 255 to get a color value.
