@@ -1,3 +1,7 @@
+# About
+
+This web app is a cross-cloud NodeJS application.
+
 # Setup
 ```
 npm i
