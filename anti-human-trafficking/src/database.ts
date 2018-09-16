@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 
 import { MongoClient, Db, ObjectId } from 'mongodb';
 
-import { Person, Location, Report, Account } from './types';
+import { Person, Location, Report, Account, Media } from './types';
 import { Result } from 'range-parser';
 import { promises } from 'fs';
 
@@ -100,5 +100,12 @@ export class Database {
         person.created = person.created || new Date().toISOString();
         const collection = this.db.collection('Persons');
         return collection.insertOne(person)
+    }
+
+    public createMedia(media: Partial<Media>) {
+        if (!this.db) throw new Error('no db');
+        media.created = media.created || new Date().toISOString();
+        const collection = this.db.collection('Media');
+        return collection.insertOne(media)
     }
 } 

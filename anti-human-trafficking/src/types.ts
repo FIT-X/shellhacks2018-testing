@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import { ObjectId, ObjectID } from 'mongodb';
 // export enum CaseStatus {
 //     open = 'open',
 //     closed = 'closed',
@@ -14,7 +14,7 @@ import { ObjectId } from 'mongodb';
 // }
 
 export interface Location {
-    id?: ObjectId,
+    _id?: ObjectId,
     city: string,
     state: string,
     address: string
@@ -28,7 +28,7 @@ export enum PersonType {
 }
 
 export interface Person {
-    id?: ObjectId,
+    _id?: ObjectId,
     type: PersonType,
     name?: string,
     age?: number,
@@ -47,7 +47,7 @@ export enum TraffickingType {
 }
 
 export interface Report {
-    id: ObjectId,
+    _id: ObjectId,
     victimId: ObjectId[],
     observedDate: string,
     locationId: ObjectId,
@@ -58,8 +58,16 @@ export interface Report {
 
 
 export interface Account {
-    id: ObjectId,
+    _id: ObjectId,
     username: string,
     passwordHash: string,
+    created: string
+}
+
+export interface Media {
+    _id: ObjectID,
+    url: string,
+    type: string,
+    ownerId: ObjectId,
     created: string
 }

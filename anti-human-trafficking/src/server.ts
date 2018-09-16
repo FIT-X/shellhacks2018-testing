@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
-import { Person, TraffickingType, Location, PersonType, Account } from './types';
+import { Person, TraffickingType, Location, PersonType, Account, Media } from './types';
 
 import { Database } from './database';
 
@@ -155,7 +155,22 @@ app.get('/status', auth, (req, res) => {
 });
 
 app.post('/media', auth, (req, res) => {
-    return res.send('Hello World!');
+    const body: Partial<Media> = req.body;
+    if (!body.url ||
+        !body.type) {
+        res.statusCode = 400;
+        return res.send('Missing parameter');
+    }
+    db.createMedia({
+        url: body.url,
+        type: body.type,
+        ownerId: (<any>req).accountId,
+    }).then(result => {
+        return res.send('Created!');
+    }).catch(err => {
+        res.statusCode = 400;
+        return res.send('Error');
+    })
 });
 
 app.get('/', (req, res) => res.send('Hello World!'));
