@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 
 import { MongoClient, Db, ObjectId } from 'mongodb';
 
-import { Person, Location, Report, Account, Media } from './types';
+import { Person, Location, Report, Account, Media, PersonType } from './types';
 
 const debug = require('debug')('app:database');
 
@@ -10,6 +10,7 @@ export class Database {
     private db?: Db
     constructor(connectionString: string) {
         MongoClient.connect(connectionString, { useNewUrlParser: true }, (err, client) => {
+            if (err) throw new Error(err.message);
             this.db = client.db();
             this.db.createIndex('Accounts', 'username', { unique: true }, () => debug('index created')); // Ensure that usernames are unique
             this.db.createIndex('Tokens', 'token', { unique: true }, () => debug('index created')); // Ensure that generated tokens are unique
@@ -59,6 +60,12 @@ export class Database {
             if (!result) return debug('could not find account');
             return Promise.resolve(result);
         })
+    }
+
+    public getVictims() {
+        if (!this.db) throw new Error('no db');
+        const collection = this.db.collection('Persons');
+        return collection.find({ type: PersonType.victim }).toArray();
     }
 
     public status(token: string) {

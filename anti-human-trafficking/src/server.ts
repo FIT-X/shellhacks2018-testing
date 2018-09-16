@@ -99,7 +99,9 @@ app.get('/reports', auth, (req, res) => {
 });
 
 app.get('/victims', auth, (req, res) => {
-    return res.send('Hello World!');
+    db.getVictims().then(results => {
+        return res.send({ items: results });
+    })
 });
 
 app.post('/account', (req, res) => {
