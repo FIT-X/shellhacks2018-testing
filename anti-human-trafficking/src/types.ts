@@ -69,5 +69,6 @@ export interface Media {
     url: string,
     type: string,
     ownerId: ObjectId,
+    reportId: ObjectId,
     created: string
 }

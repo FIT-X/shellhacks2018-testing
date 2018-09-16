@@ -70,8 +70,8 @@ app.post('/report', (req, res) => {
             traffickingType: report.traffickingType
         }
         return db.createReport(reportPartial);
-    }).then(() => {
-        return res.send('Report accepted!');
+    }).then((result) => {
+        return res.send({ reportId: result.ops[0]._id });
     });
 });
 
@@ -159,19 +159,32 @@ app.get('/status', auth, (req, res) => {
 app.post('/media', auth, (req, res) => {
     const body: Partial<Media> = req.body;
     if (!body.url ||
-        !body.type) {
+        !body.type ||
+        !body.reportId) {
         res.statusCode = 400;
         return res.send('Missing parameter');
     }
     db.createMedia({
         url: body.url,
         type: body.type,
+        reportId: new ObjectId(body.reportId),
         ownerId: (<any>req).accountId,
     }).then(result => {
-        return res.send('Created!');
+        return res.send({ mediaId: result.ops[0]._id });
     }).catch(err => {
         res.statusCode = 400;
         return res.send('Error');
+    })
+});
+
+app.get('/media', auth, (req, res) => {
+    const body = req.body;
+    if (!body.id ) {
+        res.statusCode = 400;
+        return res.send('Missing parameter');
+    }
+    db.listMedia().toArray().then(results => {
+        return res.send({ items: results });
     })
 });
 
