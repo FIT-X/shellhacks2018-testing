@@ -1,1 +1,1 @@
-require('dist/library.js')
+require('./dist/library.js')
