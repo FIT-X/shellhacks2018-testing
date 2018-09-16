@@ -19,7 +19,7 @@ client.on('message', (channel, message) => {
     debug('sub channel ' + channel + ': ' + message);
 });
 
-client.subscribe('*');
+client.subscribe('shellhacks.authorizedDonations');
 
 
 

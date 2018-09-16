@@ -188,6 +188,6 @@ app.get('/media', auth, (req, res) => {
     })
 });
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('Hello World! This only a REST API so you won\'t see any nice web pages here ;)'));
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
